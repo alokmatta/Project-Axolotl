@@ -43,13 +43,13 @@ def index():
     prompt_current_question = request.args.get("input_text")
 
     response = openai.Completion.create(
-    engine="curie-instruct-beta",
+    engine="davinci-instruct-beta",
     prompt=f"{prompt_init}\n{prompt_backstorry}\n{prompt_dynamic}\nHuman: Hello, who are you?\nAI: I am Ryan the salamander.\n{prompt_past_conversation}\nHuman: {prompt_current_question}?\nAI:",
-    temperature=0.1,
+    temperature=0.6,
     max_tokens=80,
     top_p=1,
     frequency_penalty=1,
-    presence_penalty=0.6,
+    presence_penalty=1,
     stop=["\n", " Human:", " AI:"]
     )
 
