@@ -12,7 +12,7 @@ prompt_past_conversation = ""
 prompt_current_question = "Why being 9 months old make you feel safe?"
 
 response = openai.Completion.create(
-  engine="curie-beta",
+  engine="curie-instruct-beta",
   prompt=f"{prompt_init}\n{prompt_backstorry}\n{prompt_dynamic}\nHuman: Hello, who are you?\nAI: I am Ryan the salamander.\n{prompt_past_conversation}\nHuman: {prompt_current_question}?\nAI:",
   temperature=0.1,
   max_tokens=80,
