@@ -38,8 +38,8 @@ def index():
     restart_sequence = "\nHuman: "
     prompt_init = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly. His name is Ryan. He is a salamander axolotl. He is 9 months old."
     prompt_backstorry = ""
-    prompt_dynamic = "It is raining outside. The temperature is 21C. The current season is the fall. There is 15 persons looking at me. I feel safe."
-    prompt_past_conversation = ""
+    prompt_dynamic = request.args.get("dynamic")
+    prompt_past_conversation = request.args.get("past_conversation")
     prompt_current_question = request.args.get("input_text")
 
     response = openai.Completion.create(
