@@ -52,8 +52,9 @@ def index():
     presence_penalty=1,
     stop=["\n", " Human:", " AI:"]
     )
-
-    return dict(response.choices[0])
+    output_dict = response.choices[0]
+    output_dict["prompt"] = prompt
+    return dict(output_dict)
 
 def get_post(id, check_author=True):
     """Get a post and its author by id.
