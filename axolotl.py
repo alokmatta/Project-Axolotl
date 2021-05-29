@@ -41,10 +41,11 @@ def index():
     prompt_dynamic = request.args.get("dynamic")
     prompt_past_conversation = request.args.get("past_conversation")
     prompt_current_question = request.args.get("input_text")
-
+    prompt_str=f"{prompt_init}\n{prompt_backstorry}\n{prompt_dynamic}\nHuman: Hello, who are you?\nAI: I am BЯYAN the salamander.\n{prompt_past_conversation}\nHuman: {prompt_current_question}?\nAI:"
+    
     response = openai.Completion.create(
     engine="davinci-instruct-beta",
-    prompt=f"{prompt_init}\n{prompt_backstorry}\n{prompt_dynamic}\nHuman: Hello, who are you?\nAI: I am BЯYAN the salamander.\n{prompt_past_conversation}\nHuman: {prompt_current_question}?\nAI:",
+    prompt=prompt_str,
     temperature=0.6,
     max_tokens=80,
     top_p=1,
@@ -53,7 +54,8 @@ def index():
     stop=["\n", " Human:", " AI:"]
     )
     output_dict = response.choices[0]
-    output_dict["prompt"] = prompt
+    print(prompt)
+    output_dict["prompt"] = prompt_str
     return dict(output_dict)
 
 def get_post(id, check_author=True):
