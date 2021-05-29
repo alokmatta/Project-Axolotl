@@ -36,7 +36,7 @@ def index():
   
     start_sequence = "\nAI:"
     restart_sequence = "\nHuman: "
-    prompt_init = "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly. His name is Ryan. He is a salamander axolotl. He is 9 months old."
+    prompt_init = "The following is a conversation with an AI animal. The animal is helpful, creative, clever, and very friendly. His name is BЯYAN. He is a salamander axolotl. He is 9 months old."
     prompt_backstorry = ""
     prompt_dynamic = request.args.get("dynamic")
     prompt_past_conversation = request.args.get("past_conversation")
@@ -44,7 +44,7 @@ def index():
 
     response = openai.Completion.create(
     engine="davinci-instruct-beta",
-    prompt=f"{prompt_init}\n{prompt_backstorry}\n{prompt_dynamic}\nHuman: Hello, who are you?\nAI: I am Ryan the salamander.\n{prompt_past_conversation}\nHuman: {prompt_current_question}?\nAI:",
+    prompt=f"{prompt_init}\n{prompt_backstorry}\n{prompt_dynamic}\nHuman: Hello, who are you?\nAI: I am BЯYAN the salamander.\n{prompt_past_conversation}\nHuman: {prompt_current_question}?\nAI:",
     temperature=0.6,
     max_tokens=80,
     top_p=1,
