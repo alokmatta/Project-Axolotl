@@ -54,7 +54,7 @@ def index():
     stop=["\n", " Human:", " AI:"]
     )
     output_dict = response.choices[0]
-    print(prompt)
+    print(prompt_str)
     output_dict["prompt"] = prompt_str
     return dict(output_dict)
 
