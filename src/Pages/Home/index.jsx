@@ -1,4 +1,5 @@
-import {useRef, useState} from "react";
+import React, {useRef, useState} from "react";
+import {ChatController, MuiChat} from "chat-ui-react";
 
 function HomePage () {
   const [previousPrompts, setPreviousPrompts] = useState([])
@@ -8,6 +9,13 @@ function HomePage () {
   const [season, setSeason] = useState('summer') // summer, winder, autumn, spring
   const [temperature, setTemperature] = useState(25) 
   const [crowd, setCrowd] = useState(5) // number of people around
+
+  const [chatCtl] = React.useState(new ChatController());
+
+  React.useMemo(async () => {
+    // Chat content is displayed using ChatController
+    const name = await chatCtl.setActionRequest({ type: 'text' });
+  }, [chatCtl]);
   
   const dynamic = 'It is raining outside. The temperature is 21C. Date is May 29 2021. There are 15 persons looking at me.'
   
@@ -34,6 +42,11 @@ function HomePage () {
     }).then(res => {
       let promptHistory = previousPrompts
       promptHistory.push({text: res.text, sentBy: 'bot'})
+      chatCtl.addMessage({
+        type: 'text',
+        content: res.text,
+        self: false,
+      });
       setPreviousPrompts(Array.from(promptHistory))
     })
   }
@@ -41,6 +54,12 @@ function HomePage () {
   const sendPrompt = () => {
     let promptHistory = previousPrompts
     promptHistory.push({text: inputRef.current.value, sentBy: 'me'})
+    chatCtl.addMessage({
+      type: 'text',
+      content: inputRef.current.value,
+      self: true,
+    });
+    const name = chatCtl.setActionRequest({ type: 'text' });
     setPreviousPrompts(Array.from(promptHistory))
     gpt3(inputRef.current.value)
     inputRef.current.value = ''
@@ -59,6 +78,7 @@ function HomePage () {
     <h1>Talk to BЯYAN</h1>
     <br />
     <div style={{width: '300px', margin: 'auto', textAlign: 'start'}}>
+      <MuiChat chatController={chatCtl} />
     {previousPrompts.map((prompt, i) => {
       return <div key={i} style={{marginTop: '10px'}}>{prompt.sentBy === 'bot' ? <b>Brian: </b> : <b>You: </b>}{prompt.text}</div>
     })}
