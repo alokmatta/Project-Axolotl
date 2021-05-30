@@ -25,7 +25,7 @@ function HomePage () {
       } else {
         pastConversation = pastConversation + 'Human: ' + prompt.text + '\n'
       }
-      if (index > 20){
+      if (index > 10){
         break
       }
     }
@@ -55,6 +55,7 @@ function HomePage () {
   
   return <>
     <div style={{width: '100%'}}>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNkbniqOXYzXzaaQptg2tHEq2G7ep_BBSr-g&usqp=CAU"/>
     <h1>Talk to BЯYAN</h1>
     <br />
     <div style={{width: '300px', margin: 'auto', textAlign: 'start'}}>
